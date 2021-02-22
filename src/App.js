@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import SignInBtn from "./components/signinbtn";
+import { UserContextProvider } from "./contexts/user";
+import Home from "./pages/home";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import Login from "./pages/login";
+import { auth } from "./firebase";
+import Navbar from "./containers/navbar";
+import Register from "./components/register";
+import ChatMainPage from "./pages/chat/chatmainpage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app">
+        <UserContextProvider>
+        <Navbar></Navbar>
+        <Route path="/" exact component={Home}></Route>
+        <Route path="/register" component={Register}></Route>
+        <Route path="/chat" component={ChatMainPage}></Route>
+        </UserContextProvider>
+      </div>
+    </Router>
   );
 }
 

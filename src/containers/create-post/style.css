@@ -1,0 +1,49 @@
+.createPost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2% 3%;
+}
+.createPost_loggedIn {
+  background-color: white;
+  width: 80%;
+  border-radius: 4px;
+  padding: 1% 2%;
+  
+  
+}
+p {
+  padding-top: 1%;
+  padding-left: 1%;
+}
+.createPost_imageUpload > input {
+  display: none;
+}
+
+.createPost_uploadBtn {
+  border: none;
+  background-color: white;
+}
+.createPost_loggedInBottom {
+  display: flex;
+  justify-content: space-between;
+}
+.createPost_textarea {
+  margin-top: 6px;
+  border: none;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  font-family: "Oswald", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+.createPost_textarea:focus {
+}
+
+#image-preview {
+  display: none;
+  max-height: 90px;
+  margin: 12px 0px;
+  border-radius: 4px;
+}
