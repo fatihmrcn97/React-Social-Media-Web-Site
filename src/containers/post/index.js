@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./style.css";
 import { UserContext } from "../../contexts/user";
 import Comment from "../../components/comment";
@@ -19,10 +19,34 @@ export default function Post({
   likes,
   commentCount,
   time,
-  title
+  title,
+  postId,
+  pId,
 }) {
   const [user, setUser] = useContext(UserContext).user;
   const [likeToggle, setlikeToggle] = useState(false);
+  const [whoLiked, setwhoLiked] = useState([]);
+
+  useEffect(() => {
+    firebasedb.ref("Likes").on("value", (snapshot) => {
+      if (snapshot.val()) {
+        setwhoLiked({ ...snapshot.val() });
+      }
+    });
+    if (user) {
+      Object.keys(whoLiked).map((item) => {
+        var userhisid = Object.keys(whoLiked[item]);
+        if (item === id) {
+          console.log("Bu post id item " + userhisid);
+          console.log("Buda postdan gelen " + user.uid);
+          if (user.uid == userhisid) {
+            setlikeToggle(true);
+          }
+        }
+      });
+    }
+  }, []);
+
   // Time handling
   var date = new Date(time * 1000);
   var hours = date.getHours();
@@ -37,31 +61,79 @@ export default function Post({
     else setlikeToggle(true);
   };
 
-  const deletePost = () => {
-    //delete the image from firebase sotarege
-    //get referen to the image file we like to delete
-    var imageRef = storage.refFromURL(photoURL);
-    //delete file
-    imageRef
-      .delete()
-      .then(function () {
-        console.log("Delete oldu");
-      })
-      .catch(function (err) {
-        console.log(err.message);
-      });
+  const handleDataDecrease = (data) => {
+      data = data - 1;
+    return data;
+  };
+  const handleDataIncrease = (data) => {
+    data = data + 1;
+  return data;
+};
+  const updateLikeNumber = () => {
+    if (user) {
+      if (likeToggle) {
+        firebasedb.ref(`Posts/${id}/pLikes`).once("value", (snapshot) => {
+          var likes = snapshot.val();
+          console.log(likes);
+          var newLike = handleDataDecrease(likes);
+          console.log(newLike);
+          firebasedb.ref("Posts").child(id).update({
+            pLikes: newLike,
+          });
+        });
+        firebasedb.ref(`Likes/${pId}`).child(user.uid).remove();
+      } else {
+        firebasedb.ref(`Posts/${id}/pLikes`).once("value", (snapshot) => {
+          var likes = snapshot.val();
+          console.log(likes);
+          var newLike = handleDataIncrease(likes);
+          console.log(newLike);
+          firebasedb.ref("Posts").child(id).update({
+            pLikes: newLike,
+          });
+        });
+        firebasedb.ref(`Likes/${pId}`).update({
+          [user.uid] : "Liked"
+        });
+     
+      }
+    }
+    toggleLike();
+  };
 
-    // remove post from firebase database
-    firebasedb
-      .ref("Posts")
-      .child(id)
-      .remove()
-      .then(function () {
-        console.log("databasedende gitti oldu");
-      })
-      .catch(function (err) {
-        console.log(err.message);
-      });
+  const deletePost = () => {
+    if (user) {
+      if (user.uid === postId) {
+        //delete the image from firebase sotarege
+        //get referen to the image file we like to delete
+        var imageRef = storage.refFromURL(photoURL);
+        //delete file
+        imageRef
+          .delete()
+          .then(function () {
+            console.log("Delete oldu");
+          })
+          .catch(function (err) {
+            console.log(err.message);
+          });
+
+        // remove post from firebase database
+        firebasedb
+          .ref("Posts")
+          .child(id)
+          .remove()
+          .then(function () {
+            console.log("databasedende gitti oldu");
+          })
+          .catch(function (err) {
+            console.log(err.message);
+          });
+      } else {
+        alert("Not your post");
+      }
+    } else {
+      alert("First log in");
+    }
   };
   return (
     <section className="hero">
@@ -120,38 +192,26 @@ export default function Post({
               {/*/ cardbox-item */}
               <div className="cardbox-base">
                 <ul className="float-right">
+                  <li></li>
+                  <li></li>
+                  <li></li>
                   <li>
-  
-                  </li>
-                  <li>
-                  
-                  </li>
-                  <li>
-                  
-                  </li>
-                  <li>
-                   
-                      <em className="mr-3">
-                        <CommentIcon></CommentIcon>
-                      </em>
-                   
+                    <em className="mr-3">
+                      <CommentIcon></CommentIcon>
+                    </em>
                   </li>
                 </ul>
                 <ul>
                   {likeToggle ? (
-                    <li onClick={toggleLike}>
-                  
-                        <span>
-                          <FavoriteIcon
-                            style={{ color: "pink" }}
-                          ></FavoriteIcon>
-                        </span>
-                     
+                    <li onClick={updateLikeNumber}>
+                      <span>
+                        <FavoriteIcon style={{ color: "pink" }}></FavoriteIcon>
+                      </span>
                     </li>
                   ) : (
                     <li>
                       <a>
-                        <span onClick={toggleLike}>
+                        <span onClick={updateLikeNumber}>
                           <FavoriteBorderIcon
                             style={{ color: "pink" }}
                           ></FavoriteBorderIcon>
@@ -176,11 +236,9 @@ export default function Post({
                       <em className="mr-3">{caption}</em>
                     </a>
                   </li>
-                
                 </ul>
               </div>
               {/*/ cardbox-base */}
-        
 
               {comments ? (
                 Object.keys(comments).map((id) => {

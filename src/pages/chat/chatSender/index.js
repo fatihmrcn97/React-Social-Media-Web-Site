@@ -9,6 +9,7 @@ export default function ChatSender({meesageSender,timestampsender}) {
           <span className="time_date">{timestampsender}</span> 
         </div>
       </div>
+  
       
     )
 }

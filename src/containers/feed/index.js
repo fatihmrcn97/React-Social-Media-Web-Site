@@ -34,6 +34,8 @@ export default function Feed() {
             commentCount ={posts[id].pComments}
             time ={posts[id].pTime}
             title = {posts[id].pTitle}
+            postId = {posts[id].uid}
+            pId = {posts[id].pId}
           ></Post>
         );
       })}

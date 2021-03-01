@@ -5,9 +5,9 @@ import ChatReceiver from "../chatReceiver";
 import ChatSender from "../chatSender";
 import "./style.css";
 export default function ChatMainPage() {
-  const [chatList, setchatList] = useState("");
+  const [chatList, setchatList] = useState({});
   const [user, setUser] = useContext(UserContext).user;
-  const [userList, setuserList] = useState("");
+  const [userList, setuserList] = useState({});
 
   useEffect(() => {
     firebasedb.ref("Chats").on("value", (snapshot) => {
@@ -41,10 +41,9 @@ export default function ChatMainPage() {
                   />
                   <span className="input-group-addon">
                     <button type="button">
-                      {" "}
-                      <i className="fa fa-search" aria-hidden="true" />{" "}
+                      <i className="fa fa-search" aria-hidden="true" />
                     </button>
-                  </span>{" "}
+                  </span>
                 </div>
               </div>
             </div>
@@ -52,11 +51,10 @@ export default function ChatMainPage() {
               <div className="chat_list active_chat">
                 <div className="chat_people">
                   <div className="chat_img">
-                    {" "}
                     <img
                       src="https://ptetutorials.com/images/user-profile.png"
                       alt="sunil"
-                    />{" "}
+                    />
                   </div>
                   <div className="chat_ib">
                     <h5>
@@ -74,7 +72,8 @@ export default function ChatMainPage() {
           <div className="mesgs">
             <div className="msg_history">
               {Object.keys(chatList).map((id) => {
-                      if (user.uid.toString() === chatList[id].receiver) {
+                if (user.uid.toString() === chatList[id].receiver) {
+
                   return (
                     <ChatReceiver
                       key={id}
