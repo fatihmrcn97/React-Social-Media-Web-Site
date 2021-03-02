@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../contexts/user";
 import { firebasedb } from "../../../firebase";
+import ChatList from "../chatList";
+import ChatMessageList from "../chatMessageList";
 import ChatReceiver from "../chatReceiver";
 import ChatSender from "../chatSender";
 import "./style.css";
@@ -48,57 +50,12 @@ export default function ChatMainPage() {
               </div>
             </div>
             <div className="inbox_chat">
-              <div className="chat_list active_chat">
-                <div className="chat_people">
-                  <div className="chat_img">
-                    <img
-                      src="https://ptetutorials.com/images/user-profile.png"
-                      alt="sunil"
-                    />
-                  </div>
-                  <div className="chat_ib">
-                    <h5>
-                      Sunil Rajput <span className="chat_date">Dec 25</span>
-                    </h5>
-                    <p>
-                      Test, which is a new approach to have all solutions
-                      astrology under one roof.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mesgs">
-            <div className="msg_history">
-              {Object.keys(chatList).map((id) => {
-                if (user.uid.toString() === chatList[id].receiver) {
-
-                  return (
-                    <ChatReceiver
-                      key={id}
-                      id={id}
-                      message={chatList[id].message}
-                    ></ChatReceiver>
-                  );
-                }
+              {Object.keys(userList).map((id) => {
+                return <ChatList key={id} u_Name={userList[id].name} u_image={userList[id].image}></ChatList>;
               })}
-
-              <ChatSender></ChatSender>
-            </div>
-            <div className="type_msg">
-              <div className="input_msg_write">
-                <input
-                  type="text"
-                  className="write_msg"
-                  placeholder="Type a message"
-                />
-                <button className="msg_send_btn" type="button">
-                  <i className="fa fa-paper-plane-o" aria-hidden="true" />
-                </button>
-              </div>
             </div>
           </div>
+      <ChatMessageList></ChatMessageList>
         </div>
         <p className="text-center top_spac"></p>
       </div>
