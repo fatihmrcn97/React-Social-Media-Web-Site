@@ -24,6 +24,10 @@ export default function ChatMainPage() {
     });
   }, []);
 
+  const changeMessageUser =() =>{
+    
+  }
+
   return (
     <div className="container">
       <h3 className=" text-center">Messaging</h3>
@@ -55,7 +59,7 @@ export default function ChatMainPage() {
               })}
             </div>
           </div>
-      <ChatMessageList></ChatMessageList>
+      <ChatMessageList ></ChatMessageList>
         </div>
         <p className="text-center top_spac"></p>
       </div>

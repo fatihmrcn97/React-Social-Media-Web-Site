@@ -14,7 +14,7 @@ export default function FirstPage() {
 
               <a
         
-                className="btn btn-lg btn-success btn-circle my-4 mr-3"
+                className="btn btn-lg btn-success btn-circle my-4 mr-3 colors"
               >
                 Sign Up for more
               </a>
@@ -37,10 +37,9 @@ export default function FirstPage() {
                   />
                 </div>
                 <div className="card-body">
-                  <h4 className="card-title">Ready to ship everyone</h4>
+                  <h4 className="card-title">Everybody see you in second</h4>
                   <p className="card-text">
-                    You can use this web page as personal as well as for commercial
-                    purpose 
+                    You can use this web page as personal sharing
                   </p>
                 </div>
               </div>
@@ -56,10 +55,9 @@ export default function FirstPage() {
                   />
                 </div>
                 <div className="card-body">
-                  <h4 className="card-title">Light weight</h4>
+                  <h4 className="card-title">User Friendly</h4>
                   <p className="card-text">
-                    We avoid needless js and CSS which makes template more sleek
-                    and powerful.{" "}
+                    Simple and fast usage.
                   </p>
                 </div>
               </div>
@@ -75,51 +73,27 @@ export default function FirstPage() {
                   />
                 </div>
                 <div className="card-body">
-                  <h4 className="card-title">Responsive </h4>
+                  <h4 className="card-title">Multi Platform </h4>
                   <p className="card-text">
-                    Our templates works in all devices (desktop,tablets and
-                    phones).{" "}
+                    Andriod application is available on the play store.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-md-3">
-            <div className="card shadow">
-              <div className="card-body">
-                <div className="py-3 text-center">
-                  <i
-                    className="fas fa-charging-station card-img-top fa-4x text-primary"
-                    aria-hidden="true"
-                  />
-                </div>
-                <div className="card-body">
-                  <h4 className="card-title">Easy customisation</h4>
-                  <p className="card-text">
-                    Our templates are clean,light weight and technically
-                    refined.{" "}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+     
         </div>
       </div>
       <div className="container mt-5  text-center">
         <p className="pt-5 pb-2 h4 text-monospace">
-          Speed up your development with high quality themes.
+          Share your photos with people and see how much like you get.
         </p>
         <div className="row">
           <div className="mx-auto" style={{ width: "800px" }}>
             <p className="text-center">
-              {" "}
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            The perfection of this web page , you have zero followers but everybody see what you are publishing
+            with the limited publish (1 per day, it will change by number of user) we will encounter 
+            unstable post flow .
             </p>
           </div>
         </div>
@@ -150,12 +124,11 @@ export default function FirstPage() {
                     href="#"
                     className="text-decoration-none text-dark font-weight-bold"
                   >
-                    Title of a blog post
+                   Rihanna sharing with us !!!
                   </a>
                 </h4>
                 <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content.{" "}
+                  Rihanna deside to use this web page for the sharing daily rutine.
                 </p>
               </div>
               <div className="card-footer text-muted border-0 bg-white"></div>
@@ -174,12 +147,11 @@ export default function FirstPage() {
                     href="#"
                     className="text-decoration-none text-dark font-weight-bold"
                   >
-                    Title of a blog post
+                    Cristiano Ronaldo
                   </a>
                 </h4>
                 <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content.{" "}
+                Cristiano Ronaldo deside to use this web page for the sharing daily training.
                 </p>
               </div>
               <div className="card-footer text-muted border-0 bg-white"></div>
@@ -198,12 +170,11 @@ export default function FirstPage() {
                     href="#"
                     className="text-decoration-none text-dark font-weight-bold"
                   >
-                    Title of a blog post
+                    Todays best liked : 
                   </a>
                 </h4>
                 <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content.{" "}
+                 ... User get the most like for today.
                 </p>
               </div>
               <div className="card-footer text-muted border-0 bg-white"></div>

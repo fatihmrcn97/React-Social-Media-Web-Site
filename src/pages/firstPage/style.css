@@ -17,6 +17,12 @@
    color:#fff;
    
   }
+  .colors{
+     background-color:#14171a ;
+  }
+  .colors:hover{
+     background-color: #aab8c2;
+  }
   .jumbotron-padding{
    padding-top: 6rem;
    
