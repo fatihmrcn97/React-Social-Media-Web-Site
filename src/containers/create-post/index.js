@@ -138,9 +138,9 @@ export default function CreatePost({}) {
         </div>
       ) : (
         <div>
-          <button type="button" className="btn btn-dark">
+          
             <SignInBtn></SignInBtn>
-          </button>
+        
         </div>
       )}
     </div>

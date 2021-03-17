@@ -101,3 +101,7 @@ input[type="number"] {
   color: #d8000c;
   font-weight: 500;
 }
+
+.custom-file{
+  width: 150px;
+}

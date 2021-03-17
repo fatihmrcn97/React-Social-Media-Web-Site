@@ -13,11 +13,13 @@ function Navbar() {
   };
   const [user, setUser] = useContext(UserContext).user;
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Your Star
-        </a>
+        <Link to="/">
+          <a className="navbar-brand" href="#">
+            Your Star
+          </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -33,30 +35,46 @@ function Navbar() {
           className="collapse navbar-collapse justify-content-between"
           id="navbarNav"
         >
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to="/">
-                <a className="nav-link active" aria-current="page">
-                  Home
-                </a>
-              </Link>
-            </li>
-          </ul>
+          <ul className="navbar-nav mr-auto"></ul>
 
           {user ? (
-             <ul className="navbar-nav">
-                <li className="nav-item">
-              <Link to="/chat">
-                <a className="nav-link active" aria-current="page">
-                  Chat
-                </a>
-              </Link>
-            </li>
-              <img className="navbar_img" src={user.photoURL}></img>
-                <button className="btn btn-outline-danger" onClick={logout}>Logout</button>
-          </ul>           
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/">
+                  <a className="nav-link active" aria-current="page">
+                    Home
+                  </a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/chat">
+                  <a className="nav-link active" aria-current="page">
+                    Chat
+                  </a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to="/chat">
+                  <img className="navbar_img" src={user.photoURL}></img>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <button className="btn btn-outline-danger" onClick={logout}>
+                  Logout
+                </button>
+              </li>
+            </ul>
           ) : (
             <ul className="navbar-nav">
+              <li>
+                <Link to="/login">
+                  <a className="nav-link active" aria-current="page">
+                    Login
+                  </a>
+                </Link>
+              </li>
               <li>
                 <Link to="/register">
                   <a className="nav-link active" aria-current="page">

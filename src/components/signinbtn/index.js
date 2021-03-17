@@ -3,20 +3,51 @@ import { UserContext } from "../../contexts/user";
 import { signInWithEmail } from "../../services/auth";
 import "./style.css";
 import logo from "../../assets/logo_1.png"
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Footer from "../../containers/footer";
 
 export default function SignInBtn() {
+  const history = useHistory();
   const [user, setUser] = useContext(UserContext).user;
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
 
-  
+  const [emailError, setemailError] = useState("");
+  const [passwordError, setpasswordError] = useState("");
 
-  const signInWithEmailBtn = async () => {
+  const signInWithEmailBtn = async (event) => {
+    event.preventDefault();
+    if (email === "") {
+      setemailError("Email can not be empty");
+      return;
+    } else {
+      setemailError("");
+    }
+    if (password === "") {
+      setpasswordError("Password can not be empty");
+      return;
+    } else {
+      setpasswordError("");
+    }
+    if (password.length < 6) {
+      setpasswordError("Password must have min 6 char");
+      return;
+    } else {
+      setpasswordError("");
+    }
     let userBySignInWithEmail = await signInWithEmail(email, password);
-    if (userBySignInWithEmail) setUser(userBySignInWithEmail);
+    if (userBySignInWithEmail) {
+      setUser(userBySignInWithEmail);
+      history.push("/");
+    }
+    else{
+      alert("Wrond Credentials")
+    }
+
     console.log(userBySignInWithEmail);
-    console.log("oldu dayı");
+    if(userBySignInWithEmail ===undefined){
+   //   alert("Wrond Credentials")
+    }
   };
 
   return (
@@ -38,8 +69,9 @@ export default function SignInBtn() {
           name="login"
           placeholder="login"
         />
+         <p className="errorStyle">{emailError ? emailError : ""}</p>
         <input
-          type="text"
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           id="password"
@@ -47,6 +79,7 @@ export default function SignInBtn() {
           name="login"
           placeholder="password"
         />
+         <p className="errorStyle">{passwordError ? passwordError : ""}</p>
         <input
           type="submit"
           className="fadeIn fourth"

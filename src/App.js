@@ -10,16 +10,20 @@ import { auth } from "./firebase";
 import Navbar from "./containers/navbar";
 import Register from "./components/register";
 import ChatMainPage from "./pages/chat/chatmainpage";
+import Footer from "./containers/footer";
+ 
 
 function App() {
   return (
     <Router>
       <div className="app">
         <UserContextProvider>
-        <Navbar></Navbar>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/register" component={Register}></Route>
-        <Route path="/chat" component={ChatMainPage}></Route>
+          <Navbar></Navbar>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/register" component={Register}></Route>
+          <Route path="/chat" component={ChatMainPage}></Route>
+          <Route path="/login" component={SignInBtn}></Route>
+          <Footer></Footer>
         </UserContextProvider>
       </div>
     </Router>

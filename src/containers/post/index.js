@@ -73,32 +73,35 @@ export default function Post({
     if (user) {
       if (likeToggle) {
         firebasedb.ref(`Posts/${id}/pLikes`).once("value", (snapshot) => {
-          var likes = snapshot.val();
-          console.log(likes);
+          var likes = parseInt(snapshot.val(),10);
+          console.log("Bu ilk like ----get ettik : ",likes);
           var newLike = handleDataDecrease(likes);
-          console.log(newLike);
+          console.log("Buda yeni --- like : ",newLike);
           firebasedb.ref("Posts").child(id).update({
-            pLikes: newLike,
+            pLikes: newLike.toString(),
           });
         });
         firebasedb.ref(`Likes/${pId}`).child(user.uid).remove();
       } else {
         firebasedb.ref(`Posts/${id}/pLikes`).once("value", (snapshot) => {
-          var likes = snapshot.val();
-          console.log(likes);
+          var likes = parseInt(snapshot.val(),10);
+          console.log("++++Bu ilk like get ettik : ",likes);
           var newLike = handleDataIncrease(likes);
-          console.log(newLike);
+          console.log("+++Buda yeni like : ",newLike);
           firebasedb.ref("Posts").child(id).update({
-            pLikes: newLike,
+            pLikes: newLike.toString(),
           });
         });
         firebasedb.ref(`Likes/${pId}`).update({
           [user.uid] : "Liked"
         });
-     
+        
       }
+      toggleLike();
+    }else{
+      alert("First Sign In Please");
     }
-    toggleLike();
+    
   };
 
   const deletePost = () => {
@@ -133,6 +136,7 @@ export default function Post({
       }
     } else {
       alert("First log in");
+      
     }
   };
   return (
