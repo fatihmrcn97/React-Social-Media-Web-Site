@@ -39,6 +39,20 @@ function Navbar() {
 
           {user ? (
             <ul className="navbar-nav">
+                   <li className="nav-item">
+                <Link to="/contact">
+                  <a className="nav-link active" aria-current="page">
+                    Contact Us
+                  </a>
+                </Link>
+              </li>
+               <li className="nav-item">
+                <Link to="/aboutUs">
+                  <a className="nav-link active" aria-current="page">
+                    About Us
+                  </a>
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link to="/">
                   <a className="nav-link active" aria-current="page">
@@ -53,9 +67,16 @@ function Navbar() {
                   </a>
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/profile">
+                  <a className="nav-link active" aria-current="page">
+                    Profile
+                  </a>
+                </Link>
+              </li>
 
               <li className="nav-item">
-                <Link to="/chat">
+                <Link to="/profile">
                   <img className="navbar_img" src={user.photoURL}></img>
                 </Link>
               </li>
@@ -68,6 +89,20 @@ function Navbar() {
             </ul>
           ) : (
             <ul className="navbar-nav">
+               <li className="nav-item">
+                <Link to="/contact">
+                  <a className="nav-link active" aria-current="page">
+                    Contact Us
+                  </a>
+                </Link>
+              </li>
+               <li className="nav-item">
+                <Link to="/aboutUs">
+                  <a className="nav-link active" aria-current="page">
+                    About Us
+                  </a>
+                </Link>
+              </li>
               <li>
                 <Link to="/login">
                   <a className="nav-link active" aria-current="page">

@@ -11,7 +11,9 @@ import Navbar from "./containers/navbar";
 import Register from "./components/register";
 import ChatMainPage from "./pages/chat/chatmainpage";
 import Footer from "./containers/footer";
- 
+import ContactUs from "./pages/contactUs";
+import AboutUs from "./pages/aboutUs";
+import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
           <Route path="/register" component={Register}></Route>
           <Route path="/chat" component={ChatMainPage}></Route>
           <Route path="/login" component={SignInBtn}></Route>
+          <Route path="/aboutUs" component={AboutUs}></Route>
+          <Route path="/contact" component={ContactUs}></Route>
+          <Route path="/profile" component={Profile}></Route>
           <Footer></Footer>
         </UserContextProvider>
       </div>
