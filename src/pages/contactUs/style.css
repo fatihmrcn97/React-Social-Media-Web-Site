@@ -1,0 +1,8 @@
+ .paddingtop{
+     padding-top: 10px;
+ }
+
+ .buttoncolor:hover{
+    background-color:#343a40;
+    color:white;
+ }
