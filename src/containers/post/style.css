@@ -262,3 +262,16 @@
   font-size: 16px;
   color: #8d8d8d;
 }
+
+.show_hide_comment{
+  text-align: center;
+  margin-top: 5px;
+  font-size : 14px;
+  font-weight:100;
+  -webkit-user-select: none;
+  -moz-user-select: none; 
+  -ms-user-select: none;  
+}
+.show_hide_comment:hover{
+  font-weight:500;
+}

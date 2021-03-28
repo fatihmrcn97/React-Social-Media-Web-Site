@@ -23,9 +23,15 @@ export default function Post({
   postId,
   pId,
 }) {
+  const [showComment, setshowComment] = useState(false);
   const [user, setUser] = useContext(UserContext).user;
   const [likeToggle, setlikeToggle] = useState(false);
   const [whoLiked, setwhoLiked] = useState([]);
+
+  const toggleComment = () => {
+    if (showComment) setshowComment(false);
+    else setshowComment(true);
+  };
 
   useEffect(() => {
     firebasedb.ref("Likes").on("value", (snapshot) => {
@@ -33,20 +39,25 @@ export default function Post({
         setwhoLiked({ ...snapshot.val() });
       }
     });
+  }, []);
+  useEffect(() => {
     if (user) {
-      Object.keys(whoLiked).map((item) => {
-        var userhisid = Object.keys(whoLiked[item]);
-        if (item === id) {
-          console.log("Bu post id item " + userhisid);
-          console.log("Buda postdan gelen " + user.uid);
-          if (user.uid == userhisid) {
+      asyncfunction();
+    }
+  });
+
+  const asyncfunction = async () => {
+    await Object.keys(whoLiked).map((item) => {
+      var userhisid = Object.keys(whoLiked[item]); // bunun içinde birden fazla item dönyüor
+      if (item === id) {
+        Object.keys(userhisid).map((herbirid) => {
+          if (user.uid === userhisid[herbirid]) {
             setlikeToggle(true);
           }
-        }
-      });
-    }
-  }, []);
-
+        });
+      }
+    });
+  };
   // Time handling
   var date = new Date(time * 1000);
   var hours = date.getHours();
@@ -62,21 +73,21 @@ export default function Post({
   };
 
   const handleDataDecrease = (data) => {
-      data = data - 1;
+    data = data - 1;
     return data;
   };
   const handleDataIncrease = (data) => {
     data = data + 1;
-  return data;
-};
+    return data;
+  };
   const updateLikeNumber = () => {
     if (user) {
       if (likeToggle) {
         firebasedb.ref(`Posts/${id}/pLikes`).once("value", (snapshot) => {
-          var likes = parseInt(snapshot.val(),10);
-          console.log("Bu ilk like ----get ettik : ",likes);
+          var likes = parseInt(snapshot.val(), 10);
+          console.log("Bu ilk like ----get ettik : ", likes);
           var newLike = handleDataDecrease(likes);
-          console.log("Buda yeni --- like : ",newLike);
+          console.log("Buda yeni --- like : ", newLike);
           firebasedb.ref("Posts").child(id).update({
             pLikes: newLike.toString(),
           });
@@ -84,24 +95,22 @@ export default function Post({
         firebasedb.ref(`Likes/${pId}`).child(user.uid).remove();
       } else {
         firebasedb.ref(`Posts/${id}/pLikes`).once("value", (snapshot) => {
-          var likes = parseInt(snapshot.val(),10);
-          console.log("++++Bu ilk like get ettik : ",likes);
+          var likes = parseInt(snapshot.val(), 10);
+          console.log("++++Bu ilk like get ettik : ", likes);
           var newLike = handleDataIncrease(likes);
-          console.log("+++Buda yeni like : ",newLike);
+          console.log("+++Buda yeni like : ", newLike);
           firebasedb.ref("Posts").child(id).update({
             pLikes: newLike.toString(),
           });
         });
         firebasedb.ref(`Likes/${pId}`).update({
-          [user.uid] : "Liked"
+          [user.uid]: "Liked",
         });
-        
       }
       toggleLike();
-    }else{
+    } else {
       alert("First Sign In Please");
     }
-    
   };
 
   const deletePost = () => {
@@ -136,7 +145,6 @@ export default function Post({
       }
     } else {
       alert("First log in");
-      
     }
   };
   return (
@@ -200,6 +208,7 @@ export default function Post({
                   <li></li>
                   <li></li>
                   <li>
+                    {commentCount}
                     <em className="mr-3">
                       <CommentIcon></CommentIcon>
                     </em>
@@ -214,18 +223,16 @@ export default function Post({
                     </li>
                   ) : (
                     <li>
-                      <a>
-                        <span onClick={updateLikeNumber}>
-                          <FavoriteBorderIcon
-                            style={{ color: "pink" }}
-                          ></FavoriteBorderIcon>
-                        </span>
-                      </a>
+                      <span onClick={updateLikeNumber}>
+                        <FavoriteBorderIcon
+                          style={{ color: "pink" }}
+                        ></FavoriteBorderIcon>
+                      </span>
                     </li>
                   )}
                   <li>
                     <a>
-                      <span>{likes}</span>
+                      <span>{likes} </span>
                     </a>
                   </li>
                 </ul>
@@ -245,30 +252,45 @@ export default function Post({
               {/*/ cardbox-base */}
 
               {comments ? (
-                Object.keys(comments).map((id) => {
-                  return (
-                    <div className="cardbox-comments">
-                      <span className="comment-avatar float-left">
-                        <a href>
-                          <img
-                            className="rounded-circle"
-                            src={comments[id].uDp}
-                            alt="..."
-                          />
-                        </a>
-                      </span>
-                      <div className="search">
-                        <input
-                          value={comments[id].comment}
-                          disabled
-                          type="text"
-                        />
-                      </div>
+                <div>
+                  {showComment ? (
+                    <div className="show_hide_comment" onClick={toggleComment}>
+                      Hide Comments
                     </div>
-                  );
-                })
+                  ) : (
+                    <div onClick={toggleComment} className="show_hide_comment">
+                      Show Comments
+                    </div>
+                  )}
+                  {showComment ? (
+                    Object.keys(comments).map((id) => {
+                      return (
+                        <div className="cardbox-comments">
+                          <span className="comment-avatar float-left">
+                            <a href>
+                              <img
+                                className="rounded-circle"
+                                src={comments[id].uDp}
+                                alt="..."
+                              />
+                            </a>
+                          </span>
+                          <div className="search">
+                            <input
+                              value={comments[id].comment}
+                              disabled
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
+                </div>
               ) : (
-                <></>
+                <div></div>
               )}
 
               {user ? (
