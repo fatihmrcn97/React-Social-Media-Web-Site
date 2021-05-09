@@ -1,6 +1,7 @@
 import { auth, firebasedb, provider, storage } from "../firebase";
 import makeid from "../helper/functions";
 
+
 export const signInWithGoogle = async () => {
   let user;
   await auth
@@ -16,6 +17,7 @@ export const signInWithGoogle = async () => {
 };
 
 export const logout = async () => {
+ 
   let logout_sucess;
   await auth
     .signOut()
@@ -26,6 +28,7 @@ export const logout = async () => {
       console.log(error.message);
     });
   window.location.reload();
+
   return logout_sucess;
 };
 

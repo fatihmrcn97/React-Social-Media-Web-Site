@@ -1,16 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext  } from "react";
 import SignInBtn from "../../components/signinbtn";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
-import { UserContext } from "../../contexts/user";
+import { UserContext} from "../../contexts/user";
 import { logout, signInWithGoogle } from "../../services/auth";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 function Navbar() {
+  const history = useHistory();
   const signInBtnClick = async () => {
     let userBySignIn = await signInWithGoogle();
     if (userBySignIn) setUser(userBySignIn);
     console.log(userBySignIn);
+    history.push("/");
   };
+  const logout_changescreen = () =>{
+    logout();
+    history.push("/");
+  }
   const [user, setUser] = useContext(UserContext).user;
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -82,7 +88,7 @@ function Navbar() {
               </li>
 
               <li className="nav-item">
-                <button className="btn btn-outline-danger" onClick={logout}>
+                <button className="btn btn-outline-danger" onClick={logout_changescreen}>
                   Logout
                 </button>
               </li>

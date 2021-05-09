@@ -14,6 +14,7 @@ import Footer from "./containers/footer";
 import ContactUs from "./pages/contactUs";
 import AboutUs from "./pages/aboutUs";
 import Profile from "./pages/profile";
+import PopupModal from "./popups/editprofpopup";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/aboutUs" component={AboutUs}></Route>
           <Route path="/contact" component={ContactUs}></Route>
           <Route path="/profile" component={Profile}></Route>
+          <Route path="/editProfile" component={PopupModal}></Route>
           <Footer></Footer>
         </UserContextProvider>
       </div>

@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect, Component } from "react";
+import { Link } from "react-router-dom";
 import Post from "../../containers/post";
 import { UserContext } from "../../contexts/user";
 import { firebasedb } from "../../firebase";
+import PopupModal from "../../popups/editprofpopup";
 
 export default function Profile() {
   const [user, setUser] = useContext(UserContext).user;
@@ -69,9 +71,11 @@ export default function Profile() {
                   alt="profileimage"
                   className="rounded mb-2 img-thumbnail imagesiz profile"
                 />
+                <Link to="/editProfile">
                 <a href="#" className="btn btn-outline-dark btn-sm btn-block">
-                  Edit profile
+                  Edit Profile
                 </a>
+                </Link>
               </div>
               <div className="media-body mb-5 text-white">
                 <h4 className="mt-0 mb-0">{profileName}</h4>
