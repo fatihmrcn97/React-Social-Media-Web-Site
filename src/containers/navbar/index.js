@@ -5,6 +5,8 @@ import "./style.css";
 import { UserContext} from "../../contexts/user";
 import { logout, signInWithGoogle } from "../../services/auth";
 import { Link, useHistory } from "react-router-dom";
+import logo from '../../../src/assets/logo_1.png';
+ 
 function Navbar() {
   const history = useHistory();
   const signInBtnClick = async () => {
@@ -22,6 +24,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link to="/">
+        <img className="imaage" src={logo}></img>
           <a className="navbar-brand" href="#">
             Your Star
           </a>
@@ -30,19 +33,20 @@ function Navbar() {
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
+          data-toggle="collapse"
+          data-bs-target="#navbarMenu"
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          data-target="#navbarMenu"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div
           className="collapse navbar-collapse justify-content-between"
-          id="navbarNav"
+          id="navbarMenu"
         >
           <ul className="navbar-nav mr-auto"></ul>
-
           {user ? (
             <ul className="navbar-nav">
                    <li className="nav-item">
@@ -136,6 +140,7 @@ function Navbar() {
             </ul>
           )}
         </div>
+        
       </div>
     </nav>
   );

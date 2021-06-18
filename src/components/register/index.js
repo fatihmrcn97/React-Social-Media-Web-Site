@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../contexts/user";
 import logo from "../../assets/logo_1.png";
-import { Link } from "react-router-dom";
+import { Link ,useHistory} from "react-router-dom";
 import "./style.css";
 import { signUpWithEmail } from "../../services/auth";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
 export default function Register() {
+  const history = useHistory();
   const [user, setUser] = useContext(UserContext).user;
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
@@ -77,6 +78,7 @@ export default function Register() {
     }
 
     signUpWithEmail(email, password, phone, role, name, image);
+    history.push("/login");
   };
 
   return (

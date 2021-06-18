@@ -52,7 +52,8 @@ export const signUpWithEmail = async (
   phone,
   role,
   namee,
-  profimage
+  profimage,
+  flag
 ) => {
   var imageName = makeid(10);
   let userWithEmail;
@@ -83,20 +84,23 @@ export const signUpWithEmail = async (
               firebasedb.ref("Users").child(uid).set({
                 email: email,
                 image: imageUrl,
-                namee: namee,
+                name: namee,
                 phone: phone,
                 role: role,
                 uid: uid,
                 typingTo: "noOne",
-                onlineStatus: "",
+                onlineStatus: Date.now().toString(),
                 cover: "",
               });
             });
         }
       );
+      alert("✅ Register Successfull")
+     
     })
     .catch((err) => {
       console.log(err);
+      alert("❌ "+ err.message)
     });
   return userWithEmail;
 };

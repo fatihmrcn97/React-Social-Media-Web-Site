@@ -4,6 +4,7 @@ import Post from "../../containers/post";
 import { UserContext } from "../../contexts/user";
 import { firebasedb } from "../../firebase";
 import PopupModal from "../../popups/editprofpopup";
+import "./style.css"
 
 export default function Profile() {
   const [user, setUser] = useContext(UserContext).user;
@@ -66,11 +67,14 @@ export default function Profile() {
               style={{ transform: "translateY(5rem)" }}
             >
               <div className="mr-3">
-                <img
+              <div className="deneme">
+              <img
                   src={image}
                   alt="profileimage"
                   className="rounded mb-2 img-thumbnail imagesiz profile"
                 />
+              </div>
+             
                 <Link to="/editProfile">
                 <a href="#" className="btn btn-outline-dark btn-sm btn-block">
                   Edit Profile
@@ -90,7 +94,7 @@ export default function Profile() {
           <div className="bg-light p-4 d-flex justify-content-end text-center">
             <ul className="list-inline mb-0">
               <li className="list-inline-item">
-                <h5 className="font-weight-bold mb-0 d-block">215</h5>
+                <h5 className="font-weight-bold mb-0 d-block">∞</h5>
                 <small className="text-muted">
                   {" "}
                   <i className="fas fa-image mr-1" />
@@ -98,14 +102,14 @@ export default function Profile() {
                 </small>
               </li>
               <li className="list-inline-item">
-                <h5 className="font-weight-bold mb-0 d-block">745</h5>
+                <h5 className="font-weight-bold mb-0 d-block">∞</h5>
                 <small className="text-muted">
                   <i className="fas fa-user mr-1" />
                   Followers
                 </small>
               </li>
               <li className="list-inline-item">
-                <h5 className="font-weight-bold mb-0 d-block">340</h5>
+                <h5 className="font-weight-bold mb-0 d-block">∞</h5>
                 <small className="text-muted">
                   <i className="fas fa-user mr-1" />
                   Following

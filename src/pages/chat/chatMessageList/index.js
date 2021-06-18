@@ -49,7 +49,9 @@ export default function ChatMessageList({ userreceiveruid }) {
     <div className="mesgs">
       <div className="msg_history">
         {Object.keys(chatList).map((id) => {
-          if (userreceiveruid === chatList[id].sender) {
+          if (user.uid === chatList[id].receiver && userreceiveruid === chatList[id].sender) {
+            console.log(userreceiveruid+" user reciever Id")
+            console.log(chatList[id].sender+" user sender Id")
             return (
               <ChatReceiver
                 key={id}
@@ -58,7 +60,7 @@ export default function ChatMessageList({ userreceiveruid }) {
               ></ChatReceiver>
             );
           }
-          if (userreceiveruid === chatList[id].receiver) {
+          if (userreceiveruid === chatList[id].receiver && chatList[id].sender === user.uid) {
             return (
               <ChatSender
                 key={id}

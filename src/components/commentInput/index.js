@@ -17,8 +17,8 @@ export default function CommentInput({ comments, id , username ,profileUrl}) {
         .set({
           comment: comment,
           uName: username,
-          cId: timestampforid,
-          timestamp: Date.now(),
+          cId: timestampforid.toString(),
+          timestamp: Date.now().toString(),
           uDp: profileUrl,
           uEmail: username,
           uid: user.uid,

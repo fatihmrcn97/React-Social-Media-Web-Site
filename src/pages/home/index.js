@@ -7,6 +7,7 @@ import { UserContext } from "../../contexts/user";
 import FirstPage from "../firstPage";
 import Login from "../login";
 
+
 export default function Home() {
   const [user, setUser] = useContext(UserContext).user;
   return (

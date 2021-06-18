@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../contexts/user";
 import { firebasedb } from "../../firebase";
+import "./style.css";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 export default function PopupModal() {
   const [user, setUser] = useContext(UserContext).user;
@@ -9,8 +11,8 @@ export default function PopupModal() {
   const [phoneNumber, setphoneNumber] = useState("");
   const [userFromFb, setuserFromFb] = useState([]);
   const [posts, setPosts] = useState({});
-  const [profileChangeName, setprofileChangeName] = useState("")
-  const [phoneChangeNumber, setphoneChangeNumber] = useState("")
+  const [profileChangeName, setprofileChangeName] = useState("");
+  const [phoneChangeNumber, setphoneChangeNumber] = useState("");
 
   useEffect(() => {
     firebasedb.ref("Posts").on("value", (snapshot) => {
@@ -43,28 +45,34 @@ export default function PopupModal() {
     }
   });
 
-  const updateProfile =() =>{
-    if(user){
-      console.log("calsiryormlaaaaaa")
-      if(profileChangeName){
-        console.log("calsiryormlaaaaaa")
+  const updateProfile = () => {
+    if (user) {
+      console.log("workingggg.... update profile");
+      if (profileChangeName) {
+        console.log("workingggg.... update profile 2 ");
         firebasedb.ref(`Users/${user.uid}`).update({
-          name : profileChangeName
+          name: profileChangeName,
         });
+        alert("✅ Name changes successfully");
+      } else {
       }
 
-      if(phoneChangeNumber ==! null && phoneChangeNumber.length === 10){
-        firebasedb.ref(`Users/${user.uid}`).update({
-          phone : phoneChangeNumber
-        });
-      }else{
-        alert("Phone number is empty or not 10 digit")
+      if (phoneChangeNumber) {
+        if (phoneChangeNumber.length === 10) {
+          firebasedb.ref(`Users/${user.uid}`).update({
+            phone: phoneChangeNumber,
+          });
+          alert("✅ Phone number changes successfully");
+        } else {
+          alert("❌ Phone number is empty or not 10 digit");
+        }
       }
     }
-  }
+  };
 
   return (
     <div className="container bodyy">
+     
       <div className="row gutters ">
         <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
           <div className="card h-100">
@@ -72,7 +80,7 @@ export default function PopupModal() {
               <div className="account-settings">
                 <div className="user-profile">
                   <div className="user-avatar">
-                    <img src={image} alt="Maxwell Admin" />
+                    <img src={image} alt="Maxwell Admin" id="image-previewww" />
                   </div>
                   <h5 className="user-name">{profileName}</h5>
                   <h6 className="user-email">{user.email}</h6>
@@ -103,12 +111,6 @@ export default function PopupModal() {
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
                     <label htmlFor="eMail"></label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="eMail"
-                      placeholder="Interest of you"
-                    />
                   </div>
                 </div>
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -124,44 +126,10 @@ export default function PopupModal() {
                   </div>
                 </div>
               </div>
-              <div className="row gutters">
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <h6 className="mt-3 mb-2 text-primary">Address</h6>
-                </div>
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                  <div className="form-group">
-                    <label htmlFor="Street">Street</label>
-                    <input
-                      type="name"
-                      className="form-control"
-                      id="Street"
-                      placeholder="Enter Street"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                  <div className="form-group">
-                    <label htmlFor="ciTy">City</label>
-                    <input
-                      type="name"
-                      className="form-control"
-                      id="ciTy"
-                      placeholder="Enter City"
-                    />
-                  </div>
-                </div>
-              </div>
+         
               <div className="row gutters">
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div className="text-right">
-                    <button
-                      type="button"
-                      id="submit"
-                      name="submit"
-                      className="btn btn-secondary"
-                    >
-                      Cancel
-                    </button>
                     <button
                       type="button"
                       id="submit"
