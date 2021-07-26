@@ -150,7 +150,7 @@ export default function Register() {
         />
         <div className="errorStyle">{nameError ? nameError : ""}</div>
         <input
-          type="text"
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           required

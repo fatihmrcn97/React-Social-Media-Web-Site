@@ -9,6 +9,7 @@ export const signInWithGoogle = async () => {
     .then((res) => {
       console.log(res.user);
       user = res.user;
+      
     })
     .catch((e) => {
       console.log(e.message);
